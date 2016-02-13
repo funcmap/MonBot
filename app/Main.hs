@@ -97,7 +97,7 @@ runBot hostname user password = do
             -- Some servers will close the XMPP connection after some period
             -- of inactivity. For this example, we'll simply send a "ping" every
             -- 60 seconds
-            -- getSession >>= liftIO . forkIO . sendPings 60
+            getSession >>= liftIO . forkIO . sendPings 60
             
             -- 'XMPP' is an instance of 'MonadIO', so any IO may be performed
             -- within.
