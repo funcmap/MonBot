@@ -52,13 +52,13 @@ import Data.Maybe
 import qualified MonBot as MB
 
 
-runBot :: String -> T.Text -> T.Text -> IO ()
-runBot hostname user password = do
+runBot :: String -> IO ()
+runBot hostname = do
       -- Verify that the user provided a valid JID, and that it contains a username
       -- (AKA a "node").
-      jid <- case parseJID user of
+      jid <- case parseJID MB.user of
             Just x -> return x
-            Nothing -> error $ "Invalid JID: " ++ show user
+            Nothing -> error $ "Invalid JID: " ++ show MB.user
       username <- case strNode `fmap` jidNode jid of
             Just x -> return x
             Nothing -> error $ "JID must include a username"
@@ -89,7 +89,7 @@ runBot hostname user password = do
       -- 'XMPP' is an instance of 'MonadError', so you can use the standard
       -- 'throwError' and 'catchError' computations to handle errors within an XMPP
       -- session.
-      res <- runClient server jid username password $ do
+      res <- runClient server jid username MB.password $ do
             -- When running a client session, most servers require the user to
             -- "bind" their JID before sending any stanzas.
             boundJID <- bindJID jid
@@ -227,7 +227,7 @@ main :: IO ()
 main = do
        args <- getArgs
        case args of
-            (server:user:pass:_) -> runBot server (T.pack user) (T.pack pass)
+            (server:_) -> runBot server
             _ -> do
                   name <- getProgName
-                  error $ "Use: " ++ name ++ " <server> <username> <password>"
+                  error $ "Use: " ++ name ++ " <server>"
