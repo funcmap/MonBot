@@ -7,12 +7,16 @@ If one belongs to the known users, the commands that are understood by the bot a
 For simplicity and security I have chosen to define the allowed commands as data types.
 All commands (and parameters) start with an uppercase letter. If more than two words are needed, add parentheses.
 
-Since this is all in early stage and my knowledge in Haskell is still limited, I would really like to hear your comments and follow your advices.
+This has been tested on Linux and FreeBSD - *write once, compile everywhere* &tm;
 
 
 # configuration
 
 in the file app/MonBot.hs 
+* include the configuration:
+    ```import qualified ConfigHost1 as Config```
+
+in the config file app/ConfigHost1.hs
 * fill in the list of allowed users that may talk to this bot
 * under Cmd: named executables and parameters to run
 * under Sh: shell commands
@@ -29,3 +33,4 @@ in the file app/MonBot.hs
 * Monit (Start Proc01)	- start process "proc01"
 * Monit (Stop Proc01)	- stop process "proc01"
 * Monit (Restart Proc01)	- restart process "proc01"
+
