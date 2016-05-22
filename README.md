@@ -7,7 +7,8 @@ If one belongs to the known users, the commands that are understood by the bot a
 For simplicity and security I have chosen to define the allowed commands as data types.
 All commands (and parameters) start with an uppercase letter. If more than two words are needed, add parentheses.
 
-This has been tested on Linux and FreeBSD - *write once, compile everywhere* &tm;
+This has been tested on Linux and FreeBSD - *write once, compile everywhere*
+&trade;
 
 
 # configuration
